@@ -8,10 +8,11 @@ os.chdir(current_directory)
 default_folders     = ["_old", "Documents", "Images", "Music", "Movies", "Miscellaneous"]
 files               = os.listdir(current_directory)
 
-image_extensions    = ['.png','.jpg','.gif','.bmp','.tiff']
-document_extensions = ['.doc','.docx','.pdf','.rtf','.tex','.txt','.wpd','.xps','.svg','.jar','.html','.css','.css']
+image_extensions    = ['.png','.jpg','.gif','.bmp','.tiff','.ico']
+document_extensions = ['.pptx','.xlsx','.doc','.docx','.pdf','.rtf','.tex','.txt','.wpd','.xps','.svg','.jar','.html','.htm','.css','.js']
 video_extensions    = ['.avi','.flv','.mov','.mp4','.mpg','.mpeg','.rm','.swf','.wmv']
 music_extensions    = ['.cda','.mid','.midi','.mp3','.mpa','.ogg','.wav','.wma','.wpl']
+archive_extensions  = ['.zip',".gz"]
 
 def create_folder(folder_name):
     new_directory = current_directory + folder_name
@@ -66,15 +67,25 @@ def is_music(music):
         return False
 
 def move_files():
+    program_count       = 0
     document_count      = 0
     image_count         = 0
     music_count         = 0
     movie_count         = 0
+    miscellaneous_count = 0
     
     for _x_ in files:
         file_name, file_extension = os.path.splitext(_x_)
-        if file_extension == ".py":
+        if file_name == "Downloads Manager":
             continue
+        elif file_extension == ".exe":
+            file_path = current_directory + _x_
+            move_safely_to(file_path, "Programs")
+            program_count = program_count + 1
+        elif file_extension == ".py" or file_extension == ".gz" or file_extension == ".zip" or file_extension == ".7z" or file_extension == ".rar":
+            file_path = current_directory + _x_
+            move_safely_to(file_path, "Miscellaneous")
+            miscellaneous_count = miscellaneous_count + 1
         elif is_document(_x_):
             file_path = current_directory + _x_
             move_safely_to(file_path, "Documents")
@@ -91,6 +102,9 @@ def move_files():
             file_path = current_directory + _x_
             move_safely_to(file_path, "Movies")
             movie_count = movie_count + 1
+        elif os.path.isfile(current_directory + _x_):
+            file_path = current_directory + _x_
+            move_safely_to(file_path, "Programs")
 
     print("Documents Moved: " + str(document_count))
     print("Images Moved: " + str(image_count))
