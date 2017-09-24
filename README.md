@@ -5,6 +5,9 @@ A small Python script to clean/organize your downloads folder, or any parent fol
   <img width="460" height="300" src="https://github.com/AndrewWYoung/Downloads-Folder-Organizer/blob/master/example.gif?raw=true">
 </p>
 
+## Note: ##
+This was a quick a dirty draft of the script. Refactoring, organizing, and commenting obviously needs alil work. 
+
 ## Getting Started ##
 Simply place this script into the desired folder you want cleaned/organized, and run the script.
 
