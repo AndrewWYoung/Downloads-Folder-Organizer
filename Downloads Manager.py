@@ -78,9 +78,9 @@ def move_files():
         file_name, file_extension = os.path.splitext(_x_)
         if file_name == "Downloads Manager":
             continue
-        elif file_extension == ".exe":
+        elif file_extension.lower() == ".exe":
             file_path = current_directory + _x_
-            move_safely_to(file_path, "Programs")
+            move_safely_to(file_path, "Miscellaneous")
             program_count = program_count + 1
         elif file_extension == ".py" or file_extension == ".gz" or file_extension == ".zip" or file_extension == ".7z" or file_extension == ".rar":
             file_path = current_directory + _x_
